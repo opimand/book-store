@@ -40,3 +40,19 @@ export function getCategories(books) {
 
   return category.filter(Boolean);
 }
+
+export function getId() {
+  return 'id' + new Date().getTime();
+}
+
+export const addBookOnShelf = (shelves, { shelfToAdd, bookToAdd }) => {
+  return shelves.map((shelf) => {
+    if (shelf.id === shelfToAdd) {
+      return {
+        ...shelf,
+        books: shelf.books.concat(bookToAdd),
+      };
+    }
+    return shelf;
+  });
+};

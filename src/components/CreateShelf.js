@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch } from 'react-redux';
 import { addShelf } from '../redux/actions';
+import { getId } from '../helpers';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Chips from './Chips';
+import CreateNotification from './CreateNotification';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     width: '100%',
+    padding: '10px',
+  },
+  button: {
+    marginTop: 20,
   },
 }));
 
@@ -35,17 +40,30 @@ export function CreateShelf({ categories }) {
   const [shelf, setShelf] = useState({
     name: '',
     description: '',
+    books: [],
+    reviews: [],
   });
+  const [isNotify, setNotify] = useState(false);
   const dispatch = useDispatch();
+  console.log('isNotify', isNotify);
 
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(addShelf(shelf));
+    setNotify(true);
+    setShelf({
+      name: '',
+      description: '',
+    });
+    setTimeout(() => {
+      setNotify(false);
+    }, 1000);
   }
 
   function handleInputChange(e) {
     setShelf({
       ...shelf,
+      id: getId(),
       [e.target.name]: e.target.value,
     });
   }
@@ -57,34 +75,28 @@ export function CreateShelf({ categories }) {
           <TextField
             id="standard-full-width"
             label="Name of shelf"
-            style={{ margin: 8 }}
             fullWidth
-            margin="normal"
+            margin="none"
             name="name"
-            InputLabelProps={{
-              shrink: true,
-            }}
             value={shelf.name}
             onChange={handleInputChange}
           />
           <TextField
             id="standard-full-width"
             label="Description of shelf"
-            style={{ margin: 8 }}
             fullWidth
             margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
             name="description"
             value={shelf.description}
             onChange={handleInputChange}
           />
-          <Typography> Add category to shell</Typography>
           <Chips categories={categories} setCategory={setShelf} shelf={shelf} />
-          <Button type="submit">Create</Button>
+          <Button className={classes.button} variant="contained" color="primary" type="submit">
+            Create
+          </Button>
         </form>
       </Paper>
+      <CreateNotification isNotify={isNotify} />
     </Grid>
   );
 }

@@ -1,8 +1,10 @@
 export const FETCH_BOOKS = 'BOOKS/FETCH_BOOKS';
-export const ADD_REVIEW = 'BOOKS/ADD_REVIEW';
+export const ADD_REVIEW_BOOK = 'BOOKS/ADD_REVIEW_BOOK';
 export const LIKE_BOOK = 'BOOKS/LIKE_BOOK';
 export const RATE_BOOK = 'BOOKS/RATE_BOOK';
-export const ADD_SHELF = 'BOOKS/ADD_SHELF';
 export const SHOW_LOADER = 'APP/SHOW_LOADER';
 export const HIDE_LOADER = 'APP/HIDE_LOADER';
 export const DARK_MODE = 'APP/DARK_MODE';
+export const ADD_SHELF = 'SHELF/ADD_SHELF';
+export const ADD_SHELF_REVIEW = 'SHELF/ADD_SHELF_REVIEW';
+export const ADD_BOOK_TO_SHELF = 'SHELF/ADD_BOOK_TO_SHELF';

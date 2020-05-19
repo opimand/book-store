@@ -1,6 +1,8 @@
 import {
-  ADD_REVIEW,
+  ADD_BOOK_TO_SHELF,
+  ADD_REVIEW_BOOK,
   ADD_SHELF,
+  ADD_SHELF_REVIEW,
   DARK_MODE,
   FETCH_BOOKS,
   HIDE_LOADER,
@@ -20,15 +22,15 @@ export function fetchBooks() {
       },
     });
     const json = await response.json();
-    json.items.forEach((item) => ((item.liked = false), (item.rating = 0)));
+    json.items.forEach((item) => ((item.liked = false), (item.rating = 0), (item.reviews = [])));
     dispatch({ type: FETCH_BOOKS, payload: json.items });
     dispatch(hideLoader());
   };
 }
 
-export function addReview(data) {
+export function addBookReview(data) {
   return {
-    type: ADD_REVIEW,
+    type: ADD_REVIEW_BOOK,
     payload: data,
   };
 }
@@ -68,6 +70,20 @@ export function darkModeToggle() {
 export function addShelf(data) {
   return {
     type: ADD_SHELF,
+    payload: data,
+  };
+}
+
+export function addBookToShelf(data) {
+  return {
+    type: ADD_BOOK_TO_SHELF,
+    payload: data,
+  };
+}
+
+export function addShelfReview(data) {
+  return {
+    type: ADD_SHELF_REVIEW,
     payload: data,
   };
 }

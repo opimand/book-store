@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Router, Route, Link } from 'react-router-dom';
+import { Router, Route, Link, Switch } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { useDispatch, useSelector } from 'react-redux';
 import { darkModeToggle, fetchBooks } from '../redux/actions';
@@ -19,11 +19,13 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import CenteredGrid from './Grid';
 import DetailBook from './DetailBook';
 import Spinner from './Spinner';
 import { CreateShelf } from './CreateShelf';
 import { getCategories } from '../helpers';
+import { Shelves } from './Shelves';
+import { GridBooks } from './GridBooks';
+import nightSvg from '../img/nightMode.svg';
 
 const drawerWidth = 240;
 const history = createBrowserHistory();
@@ -106,8 +108,6 @@ export default function PersistentDrawerLeft() {
   const favoriteBooks = books.filter((book) => book.liked === true);
   const categories = getCategories(books.map((i) => i.volumeInfo.categories));
 
-  console.log('categories: ', categories);
-
   useEffect(() => {
     if (!books.length) {
       dispatch(fetchBooks());
@@ -154,10 +154,7 @@ export default function PersistentDrawerLeft() {
               Books
             </Typography>
             <Button className={clsx(classes.button)} onClick={darkModeHandler}>
-              <img
-                className={clsx(classes.iconNight)}
-                src="http://www.stickpng.com/assets/images/580b57fcd9996e24bc43c399.png"
-              ></img>
+              <img className={classes.iconNight} src={nightSvg} alt="night" />
             </Button>
           </Toolbar>
         </AppBar>
@@ -196,24 +193,27 @@ export default function PersistentDrawerLeft() {
             [classes.contentShift]: open,
           })}
         >
-          <Route exact path="/" component={() => <CenteredGrid books={books} title="Books" />} />
+          <Route exact path="/" render={() => <GridBooks books={books} title="books" />} />
           <Route
             path="/favorites"
-            component={() => <CenteredGrid books={favoriteBooks} title="Favorites" />}
+            render={() => <GridBooks books={favoriteBooks} title="favorites" />}
           />
           <Route
+            exact
             path="/shelves"
-            component={() => <CenteredGrid shelves={shelves} title="Shelves" />}
+            render={() => <Shelves shelves={shelves} />}
             title="Shelves"
           />
           <Route
             path="/create"
-            component={() => (
-              <CreateShelf shelves={shelves} categories={categories} title="Shelves" />
-            )}
+            render={() => <CreateShelf shelves={shelves} categories={categories} title="shelves" />}
             title="Create shelf"
           />
           <Route path="/:id" component={DetailBook} />
+          <Route
+            path="/shelves/:shelfId"
+            render={({ match }) => <GridBooks shelves={shelves} title="shelves" match={match} />}
+          />
         </main>
       </div>
     </Router>

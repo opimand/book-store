@@ -5,8 +5,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,10 +25,10 @@ const useStyles = makeStyles((theme) => ({
   },
   list: {
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     flexWrap: 'wrap',
     listStyle: 'none',
-    padding: theme.spacing(0.5),
+    padding: 0,
     margin: 0,
   },
   chip: {
@@ -61,7 +61,15 @@ export default function Shelf({ shelf }) {
         </ul>
       </CardContent>
       <CardActions>
-        <Button size="small">Learn More</Button>
+        <Button
+          component={Link}
+          to={'/shelves/' + shelf.id}
+          variant="contained"
+          color="primary"
+          size="small"
+        >
+          Learn More
+        </Button>
       </CardActions>
     </Card>
   );

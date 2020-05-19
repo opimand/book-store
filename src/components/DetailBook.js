@@ -9,11 +9,14 @@ import ReviewForm from './ReviewForm';
 import noImage from '../img/no-photo.svg';
 import Reviews from './Reviews';
 import Spinner from './Spinner';
+import AddToShell from './addToShell';
+import Chips from './Chips';
+import Chip from '@material-ui/core/Chip';
+import Paper from '@material-ui/core/Paper';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     padding: 10,
-    border: '2px solid #ececec',
     margin: '0 auto',
     display: 'flex',
   },
@@ -27,7 +30,10 @@ const useStyles = makeStyles({
     display: 'flex',
     flexDirection: 'column-reverse',
   },
-});
+  chip: {
+    marginRight: theme.spacing(0.5),
+  },
+}));
 
 export default function DetailBook(props) {
   const dispatch = useDispatch();
@@ -43,12 +49,12 @@ export default function DetailBook(props) {
   const book = books.find((book) => book.id === id);
 
   if (book) {
-    const { title, authors, publisher, imageLinks } = book.volumeInfo;
+    const { title, authors, publisher, imageLinks, categories } = book.volumeInfo;
     const { reviews, id, rating } = book;
-
+    console.log(book);
     return (
       <Container maxWidth="md">
-        <div className={classes.root}>
+        <Paper className={classes.root}>
           <div className={classes.left}>
             <img src={imageLinks ? imageLinks.thumbnail : noImage} alt="book img" />
           </div>
@@ -56,16 +62,24 @@ export default function DetailBook(props) {
             <Typography variant="h4" align="left" color="textPrimary" className="book__title">
               {title}
             </Typography>
-            <Typography align="left" color="textPrimary" className="book__author">
+            <Typography align="left" color="textPrimary" className="book__info">
               {authors}
             </Typography>
-            <Typography align="left" color="textPrimary" className="book__publisher">
+            <Typography align="left" color="textPrimary" className="book__info">
               {publisher}
             </Typography>
+            <div className={classes.chips}>
+              {categories
+                ? categories.map((value) => (
+                    <Chip key={value} label={value} className={classes.chip} />
+                  ))
+                : null}
+            </div>
             <StarRating rating={rating} id={id} />
+            <AddToShell book={book} />
             <ReviewForm id={id} />
           </div>
-        </div>
+        </Paper>
         <div className={classes.reviewsWrap}>
           <Reviews reviews={reviews} />
         </div>

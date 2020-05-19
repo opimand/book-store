@@ -1,30 +1,32 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import { NoItemsTitle } from './NoItemsTitle';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     padding: 10,
-    marginTop: 50,
-    border: '2px solid #ececec',
+    marginTop: theme.spacing(1),
     margin: '0 auto',
     width: '100%',
+    display: 'flex',
+    flexDirection: 'column-reverse',
   },
   review: {
     textAlign: 'center',
-    margin: '30px',
   },
-});
+}));
 export default function Reviews({ reviews }) {
   const classes = useStyles();
-
-  if (reviews) {
+  console.log('reviews: ', reviews);
+  if (reviews.length) {
     return reviews.map((review) => (
-      <div key={Math.random().toString(36).substring(7)} className={classes.root}>
+      <Paper key={Math.random().toString(36).substring(7)} className={classes.root}>
         <Typography>{review}</Typography>
-      </div>
+      </Paper>
     ));
-  } else {
-    return <Typography className={classes.review}>No reviews yet</Typography>;
+  } else if (reviews.length < 1) {
+    return <NoItemsTitle title={'reviews'} />;
   }
 }

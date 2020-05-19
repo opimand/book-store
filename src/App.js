@@ -29,7 +29,7 @@ const darkTheme = {
   overrides: {
     MuiPaper: {
       root: {
-        backgroundColor: '292929',
+        backgroundColor: '#292929',
       },
     },
     MuiRating: {
@@ -41,15 +41,27 @@ const darkTheme = {
       outlined: {
         color: '#eacdcd',
       },
+      root: {
+        color: '#eacdcd',
+        '&$focused': {
+          color: '#eacdcd',
+        },
+      },
     },
     MuiButton: {
       label: {
-        color: '#978e8e',
+        color: '#eacdcd',
+      },
+      containedPrimary: {
+        '&:hover': {
+          backgroundColor: '#564f4f',
+        },
       },
     },
+
     MuiIconButton: {
       label: {
-        color: '#978e8e',
+        color: '#eacdcd',
       },
     },
   },

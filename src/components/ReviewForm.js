@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import SendButton from './ButtonSend';
 import { useDispatch } from 'react-redux';
-import { addReview } from '../redux/actions';
+import { addBookReview, addShelfReview } from '../redux/actions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ReviewForm({ id }) {
+export default function ReviewForm({ id, shelf }) {
   const classes = useStyles();
   const [review, setReview] = useState('');
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ export default function ReviewForm({ id }) {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(addReview({ id, review }));
+    dispatch(shelf ? addShelfReview({ id, review }) : addBookReview({ id, review }));
     setReview('');
   }
 

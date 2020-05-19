@@ -76,7 +76,7 @@ export default function MediaCard({ isLiked, id, title, image, author, categorie
         <IconButton onClick={handlerClick} aria-label="like">
           <Like width={15} height={15} disabled={isLiked} />
         </IconButton>
-        <Button component={Link} to={'/' + id} size="small" color="secondary">
+        <Button component={Link} to={'/' + id} size="small" color="primary" variant="contained">
           Review
         </Button>
       </CardActions>

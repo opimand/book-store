@@ -9,9 +9,9 @@ import Chip from '@material-ui/core/Chip';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    margin: theme.spacing(1),
     minWidth: 120,
     maxWidth: 300,
+    marginRight: 0,
   },
   chips: {
     display: 'flex',
@@ -50,20 +50,21 @@ export default function Chips({ categories, setCategory, shelf }) {
   const theme = useTheme();
   const [categoryName, setCategoryName] = React.useState([]);
 
-  const handleChange = (event) => {
-    setCategoryName(event.target.value);
-  };
   useEffect(() => {
     setCategory({ ...shelf, categories: categoryName });
   }, [categoryName]);
 
+  const handleChange = (event) => {
+    setCategoryName(event.target.value);
+  };
+
   return (
     <div>
       <FormControl className={classes.formControl}>
-        <InputLabel id="demo-mutiple-chip-label">Chip</InputLabel>
+        <InputLabel id="mutiple-chip-label">Category:</InputLabel>
         <Select
-          labelId="demo-mutiple-chip-label"
-          id="demo-mutiple-chip"
+          labelId="mutiple-chip-label"
+          id="mutiple-chip"
           multiple
           value={categoryName}
           onChange={handleChange}

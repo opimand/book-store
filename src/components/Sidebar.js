@@ -174,7 +174,7 @@ export default function PersistentDrawerLeft() {
           </div>
           <Divider />
           <List>
-            <ListItem button component={Link} to="/">
+            <ListItem button component={Link} to="/book-store">
               <ListItemText>Books</ListItemText>
             </ListItem>
             <ListItem button component={Link} to="/favorites">
@@ -193,7 +193,11 @@ export default function PersistentDrawerLeft() {
             [classes.contentShift]: open,
           })}
         >
-          <Route exact path="/" render={() => <GridBooks books={books} title="books" />} />
+          <Route
+            exact
+            path="/book-store"
+            render={() => <GridBooks books={books} title="books" />}
+          />
           <Route
             path="/favorites"
             render={() => <GridBooks books={favoriteBooks} title="favorites" />}

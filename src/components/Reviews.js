@@ -19,14 +19,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function Reviews({ reviews }) {
   const classes = useStyles();
-  console.log('reviews: ', reviews);
+
   if (reviews.length) {
     return reviews.map((review) => (
       <Paper key={Math.random().toString(36).substring(7)} className={classes.root}>
         <Typography>{review}</Typography>
       </Paper>
     ));
-  } else if (reviews.length < 1) {
+  } else {
     return <NoItemsTitle title={'reviews'} />;
   }
 }

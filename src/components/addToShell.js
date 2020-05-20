@@ -27,12 +27,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AddToShell({ book }) {
+export default function AddToShell({ book, categories }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const [shelf, setShelf] = React.useState('');
   const shelves = useSelector((state) => state.books.shelves);
+  const {id} = book
+
+  const filteredShelves = shelves.filter((shelf) => shelf.categories.find(e => categories.includes(e)))
+  const deleteDouble = filteredShelves.filter((shelf) => !shelf.books.find((book) => book.id === id))
 
   const handleChange = (event) => {
     setShelf(event.target.value || '');
@@ -77,8 +81,8 @@ export default function AddToShell({ book }) {
                 <MenuItem value="">
                   <em>No shelves</em>
                 </MenuItem>
-                {shelves
-                  ? shelves.map((shelf) => <MenuItem value={shelf.id}>{shelf.name}</MenuItem>)
+                {deleteDouble
+                  ? deleteDouble.map((shelf) => <MenuItem key={shelf.id} value={shelf.id}>{shelf.name}</MenuItem>)
                   : null}
               </Select>
             </FormControl>

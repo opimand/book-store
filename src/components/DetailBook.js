@@ -49,7 +49,7 @@ export default function DetailBook(props) {
   if (book) {
     const { title, authors, publisher, imageLinks, categories } = book.volumeInfo;
     const { reviews, id, rating } = book;
-    console.log(book);
+
     return (
       <Container maxWidth="md">
         <Paper className={classes.root}>
@@ -74,7 +74,7 @@ export default function DetailBook(props) {
                 : null}
             </div>
             <StarRating rating={rating} id={id} />
-            <AddToShell book={book} />
+            <AddToShell book={book} categories={categories}/>
             <ReviewForm id={id} />
           </div>
         </Paper>

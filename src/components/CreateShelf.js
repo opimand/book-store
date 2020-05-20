@@ -45,7 +45,6 @@ export function CreateShelf({ categories }) {
   });
   const [isNotify, setNotify] = useState(false);
   const dispatch = useDispatch();
-  console.log('isNotify', isNotify);
 
   function handleSubmit(e) {
     e.preventDefault();

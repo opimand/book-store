@@ -37,7 +37,7 @@ export function Shelves({ shelves }) {
       <Grid container spacing={3} justify="center">
         {shelves.length ? (
           shelves.map(({ name, description, id, reviews }) => (
-            <Grid item sm={12}>
+            <Grid item sm={12} key={id}>
               <Paper className={classes.spacing}>
                 <Typography>Name: {name}</Typography>
                 <Typography>Description: {description}</Typography>
@@ -50,11 +50,9 @@ export function Shelves({ shelves }) {
                 >
                   Open shelf
                 </Button>
-
                 <ReviewForm className={classes.form} id={id} shelf="shelf" />
-
                 <div className={classes.wrapper}>
-                  <Reviews reviews={reviews} />
+                  <Reviews reviews={reviews}/>
                 </div>
               </Paper>
             </Grid>

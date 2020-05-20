@@ -26,6 +26,9 @@ export function fetchBooks() {
       o.liked = false;
       o.rating = 0;
       o.reviews = [];
+      if(!o.categories) {
+        o.categories = ['Unknown']
+      }
     });
     dispatch({ type: FETCH_BOOKS, payload: json.items });
     dispatch(hideLoader());

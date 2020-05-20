@@ -23,7 +23,7 @@ function shortString(string) {
   return bookTitle;
 }
 
-export default function MediaCard({ isLiked, id, title, image, author, categories, theme }) {
+export default function MediaCard({ isLiked, id, title, image, author, categories }) {
   const themeColor = useTheme();
   const useStyles = makeStyles({
     root: {

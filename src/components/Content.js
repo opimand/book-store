@@ -1,7 +1,7 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {useEffect, useState } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Router, Route, Link, Switch } from 'react-router-dom';
+import { Router, Route, Link } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { useDispatch, useSelector } from 'react-redux';
 import { darkModeToggle, fetchBooks } from '../redux/actions';
@@ -97,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PersistentDrawerLeft() {
+export default function Content() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);

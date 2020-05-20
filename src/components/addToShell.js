@@ -33,15 +33,6 @@ export default function AddToShell({ book }) {
   const [open, setOpen] = React.useState(false);
   const [shelf, setShelf] = React.useState('');
   const shelves = useSelector((state) => state.books.shelves);
-  const { categories } = book.volumeInfo;
-
-  const filteredCategories = categories
-    ? categories.map((item) => {
-        // shelves.categories.indexOf(item);
-      })
-    : null;
-
-  console.log('filteredCategories: ', filteredCategories);
 
   const handleChange = (event) => {
     setShelf(event.target.value || '');

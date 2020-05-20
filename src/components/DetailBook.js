@@ -8,9 +8,7 @@ import StarRating from './Rating';
 import ReviewForm from './ReviewForm';
 import noImage from '../img/no-photo.svg';
 import Reviews from './Reviews';
-import Spinner from './Spinner';
 import AddToShell from './addToShell';
-import Chips from './Chips';
 import Chip from '@material-ui/core/Chip';
 import Paper from '@material-ui/core/Paper';
 
@@ -85,5 +83,5 @@ export default function DetailBook(props) {
         </div>
       </Container>
     );
-  } else return <div></div>;
+  } else return null;
 }

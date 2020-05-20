@@ -1,6 +1,6 @@
 import * as React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Sidebar from './components/Sidebar';
+import Content from './components/Content';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 import { useSelector } from 'react-redux';
 
@@ -91,7 +91,7 @@ function App() {
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
-      <Sidebar />
+      <Content />
     </MuiThemeProvider>
   );
 }

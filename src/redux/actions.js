@@ -22,7 +22,11 @@ export function fetchBooks() {
       },
     });
     const json = await response.json();
-    json.items.forEach((item) => ((item.liked = false), (item.rating = 0), (item.reviews = [])));
+    json.items.forEach((o) => {
+      o.liked = false;
+      o.rating = 0;
+      o.reviews = [];
+    });
     dispatch({ type: FETCH_BOOKS, payload: json.items });
     dispatch(hideLoader());
   };

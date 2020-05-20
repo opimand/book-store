@@ -112,7 +112,7 @@ export default function Content() {
     if (!books.length) {
       dispatch(fetchBooks());
     }
-  }, []);
+  }, [books, dispatch]);
 
   const handleDrawerOpen = () => {
     setOpen(true);

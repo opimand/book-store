@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchBooks } from '../redux/actions';
+import React from 'react';
+import {  useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
@@ -34,12 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function DetailBook(props) {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    if (!books.length) {
-      dispatch(fetchBooks());
-    }
-  }, []);
+
 
   const classes = useStyles();
   const id = props.match.params.id;
